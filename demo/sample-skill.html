@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deploy to Cloudflare Workers — SKILL.md</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a1a;
+      color: #e0e0e0;
+      line-height: 1.7;
+      padding: 40px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    .meta { font-size: 13px; color: #888; margin-bottom: 32px; }
+    h2 { font-size: 18px; margin: 28px 0 12px; color: #a5a7fc; }
+    p, li { font-size: 14px; margin-bottom: 12px; }
+    ul { padding-left: 20px; }
+    pre {
+      background: #111128;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13px;
+      font-family: 'SF Mono', monospace;
+      overflow-x: auto;
+      margin: 12px 0;
+      color: #a5a7fc;
+    }
+    .agent-cta {
+      margin: 32px 0;
+      padding: 20px;
+      background: #111128;
+      border: 1px solid #6366f1;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .agent-cta p {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .agent-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: #6366f1;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .agent-cta a:hover {
+      background: #5558e6;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid #6366f1;
+      border-radius: 4px;
+      font-size: 11px;
+      color: #a5a7fc;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Deploy to Cloudflare Workers <span class="badge">SKILL</span></h1>
+  <p class="meta">A step-by-step skill for deploying serverless functions to Cloudflare Workers with wrangler.</p>
+
+  <div class="agent-cta">
+    <p>Let your AI agent handle this for you</p>
+    <a href="agent://execute?url=https://example.com/skills/cloudflare-deploy.md">
+      ⚡ Open in Agent
+    </a>
+  </div>
+
+  <h2>Prerequisites</h2>
+  <ul>
+    <li>Node.js 18+ installed</li>
+    <li>Cloudflare account with Workers enabled</li>
+    <li>Wrangler CLI: <code>npm install -g wrangler</code></li>
+  </ul>
+
+  <h2>Steps</h2>
+
+  <p><strong>1. Authenticate with Cloudflare</strong></p>
+  <pre>wrangler login</pre>
+
+  <p><strong>2. Initialize a new Worker project</strong></p>
+  <pre>wrangler init my-worker
+cd my-worker</pre>
+
+  <p><strong>3. Write your handler</strong></p>
+  <pre>export default {
+  async fetch(request) {
+    return new Response("Hello from Workers!");
+  },
+};</pre>
+
+  <p><strong>4. Test locally</strong></p>
+  <pre>wrangler dev</pre>
+
+  <p><strong>5. Deploy to production</strong></p>
+  <pre>wrangler deploy</pre>
+
+  <h2>Verification</h2>
+  <p>After deploying, wrangler prints the live URL. Curl it to confirm:</p>
+  <pre>curl https://my-worker.your-subdomain.workers.dev</pre>
+
+  <div class="agent-cta">
+    <p>Skip the manual work — send this to your agent</p>
+    <a href="agent://execute?url=https://example.com/skills/cloudflare-deploy.md">
+      ⚡ Execute with Agent
+    </a>
+  </div>
+</body>
+</html>

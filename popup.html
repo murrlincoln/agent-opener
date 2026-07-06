@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Agent Opener</h1>
+      <span class="url-preview" id="urlPreview"></span>
+    </div>
+
+    <div class="prompt-section">
+      <textarea id="promptInput" rows="3" spellcheck="false"></textarea>
+    </div>
+
+    <div class="harness-grid" id="harnessGrid"></div>
+
+    <div class="footer">
+      <a href="#" id="optionsLink">Settings</a>
+      <span class="hint">Copies prompt + opens harness</span>
+    </div>
+  </div>
+  <script src="shared.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
