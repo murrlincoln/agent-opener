@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Agent Opener",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Open any webpage in your AI agent — the agent:// protocol polyfill",
   "permissions": ["activeTab", "tabs", "storage"],
   "action": {
@@ -27,7 +27,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["content.js"],
+      "js": ["shared.js", "content.js"],
       "run_at": "document_idle"
     }
   ],

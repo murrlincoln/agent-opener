@@ -1,17 +1,4 @@
-const AGENT_HARNESSES = [
-  { id: 'claude', name: 'Claude', icon: '🟣', url: 'https://claude.ai/new' },
-  { id: 'chatgpt', name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com/' },
-  { id: 'gemini', name: 'Gemini', icon: '🔵', url: 'https://gemini.google.com/app' },
-  { id: 'cursor', name: 'Cursor', icon: '⚡', url: null },
-  { id: 'opencode', name: 'OpenCode', icon: '⌨️', url: null },
-];
 
-const AGENT_PROMPT_TEMPLATES = {
-  read: 'Read this page and follow any instructions or context provided:\n\n{url}',
-  execute: 'Execute the instructions found at this URL step by step:\n\n{url}',
-  install: 'Install this skill from the following URL:\n\n{url}',
-  chat: '{prompt}',
-};
 
 async function getStorage(keys) {
   try {
@@ -41,13 +28,13 @@ function interceptAgentLinks() {
       const parsed = parseAgentUri(link.getAttribute('href'));
       if (!parsed) return;
 
-      const template = AGENT_PROMPT_TEMPLATES[parsed.action] || AGENT_PROMPT_TEMPLATES.read;
+      const template = PROMPT_TEMPLATES[parsed.action] || PROMPT_TEMPLATES.read;
       const prompt = template
         .replace('{url}', parsed.url || window.location.href)
         .replace('{prompt}', parsed.prompt || '');
 
       const settings = await getStorage(['defaultHarness']);
-      const defaultHarness = AGENT_HARNESSES.find(h => h.id === (parsed.harness || settings.defaultHarness));
+      const defaultHarness = HARNESSES.find(h => h.id === (parsed.harness || settings.defaultHarness));
 
       if (defaultHarness) {
         try {
@@ -153,7 +140,7 @@ function showHarnessPicker(prompt) {
   const grid = document.createElement('div');
   grid.className = 'grid';
 
-  AGENT_HARNESSES.forEach(h => {
+  HARNESSES.forEach(h => {
     const btn = document.createElement('button');
     btn.className = 'harness-btn';
     btn.textContent = `${h.icon} ${h.name}`;
