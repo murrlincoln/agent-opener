@@ -119,6 +119,17 @@ There's no `mailto:` equivalent for AI agents. No standard way for a website to 
 
 The extension serves as a **polyfill** — once agents natively register `agent://` protocol handlers (trivial for them to implement), the extension becomes unnecessary.
 
+## Permissions
+
+| Permission | Why |
+|-----------|-----|
+| `activeTab` | Read the URL of the current tab when the popup is opened |
+| `tabs` | Query tab info for the popup to display the current page URL |
+| `storage` | Save user preferences (default harness, prompt template) |
+| Content script on `http://*/*` and `https://*/*` | Intercept `agent://` links on web pages |
+
+The extension does **not** request host permissions, does **not** read page content, and does **not** make network requests. All it does is read the current tab's URL and copy a prompt to your clipboard.
+
 ## Contributing
 
 PRs welcome. Key areas:

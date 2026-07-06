@@ -121,7 +121,14 @@ function showAgentToast(message) {
   setTimeout(() => toast.remove(), 3000);
 }
 
-interceptAgentLinks();
+function init() {
+  if (!document.body) {
+    document.addEventListener('DOMContentLoaded', init);
+    return;
+  }
+  interceptAgentLinks();
+  const observer = new MutationObserver(interceptAgentLinks);
+  observer.observe(document.body, { childList: true, subtree: true });
+}
 
-const observer = new MutationObserver(interceptAgentLinks);
-observer.observe(document.body, { childList: true, subtree: true });
+init();
