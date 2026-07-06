@@ -130,6 +130,13 @@ The extension serves as a **polyfill** — once agents natively register `agent:
 
 The extension does **not** request host permissions, does **not** read page content, and does **not** make network requests. All it does is read the current tab's URL and copy a prompt to your clipboard.
 
+## Known Limitations
+
+- **Address bar navigation**: Typing `agent://read?url=...` directly in the browser address bar won't work. Chrome doesn't allow extensions to register custom protocol handlers for the omnibox. The extension only intercepts `agent://` links within page content.
+- **Restricted pages**: The content script cannot run on `chrome://`, `chrome-extension://`, or `file://` pages. Use Cmd+Shift+A (the popup) on those pages instead.
+- **Clipboard on strict CSP pages**: Some pages with very restrictive Content Security Policies may block clipboard access from the content script overlay. The extension uses Shadow DOM to isolate its UI, but clipboard still requires a user gesture. Fallback: use Cmd+Shift+A.
+- **No native agent:// registration yet**: Until agents (Claude, ChatGPT, Cursor) natively register protocol handlers, the extension is required as a polyfill.
+
 ## Contributing
 
 PRs welcome. Key areas:

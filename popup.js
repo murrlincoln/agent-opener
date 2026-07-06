@@ -1,6 +1,14 @@
 let currentUrl = '';
 let currentTitle = '';
 
+async function getStorage(keys) {
+  try {
+    return await chrome.storage.sync.get(keys);
+  } catch {
+    return await chrome.storage.local.get(keys);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   currentUrl = tab?.url || '';
@@ -8,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('urlPreview').textContent = currentUrl;
 
-  const settings = await chrome.storage.sync.get(['promptTemplate', 'defaultHarness', 'customHarnesses']);
+  const settings = await getStorage(['promptTemplate', 'defaultHarness', 'customHarnesses']);
   const template = settings.promptTemplate || DEFAULT_PROMPT_TEMPLATE;
   const prompt = template.replace('{url}', currentUrl).replace('{title}', currentTitle);
   document.getElementById('promptInput').value = prompt;
@@ -49,7 +57,7 @@ async function sendToHarness(harness) {
 
   try {
     await navigator.clipboard.writeText(prompt);
-  } catch (err) {
+  } catch {
     showToast('Failed to copy — check clipboard permissions');
     return;
   }

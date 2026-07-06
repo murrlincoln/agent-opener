@@ -3,6 +3,7 @@ const HARNESSES = [
   { id: 'chatgpt', name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com/' },
   { id: 'gemini', name: 'Gemini', icon: '🔵', url: 'https://gemini.google.com/app' },
   { id: 'cursor', name: 'Cursor', icon: '⚡', url: null },
+  { id: 'opencode', name: 'OpenCode', icon: '⌨️', url: null },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
